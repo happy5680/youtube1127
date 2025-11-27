@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 每日新知加速器 - 高效學習</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* 馬卡龍色調定義 (調整後的顏色) */
+            --macaron-pink: #FF9AA2; /* 櫻花粉 (更亮) */
+            --macaron-mint: #B5EAD7; /* 薄荷綠 (更鮮明) */
+            --macaron-yellow: #FFDAC1; /* 珊瑚黃 (更暖) */
+            --macaron-blue: #C7CEEA; /* 薰衣草藍 (更深) */
+            --macaron-purple: #92A8D1; /* 紫羅蘭 (作為主要強調色) */
+            --text-color: #333;
+            --main-bg: #F0F4F8; /* 淺灰藍底色 */
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: var(--macaron-purple); /* 使用更深的紫色 */
+            font-size: 2.4em; /* 標題略放大 */
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        /* 輸入與按鈕區塊 */
+        .input-group {
+            /* 邊框顏色從薄荷綠改為淡藍，增加區塊感 */
+            background-color: var(--macaron-blue); 
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* 陰影略深 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        select, button {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select {
+            /* 邊框使用粉色，增加對比 */
+            border: 2px solid var(--macaron-pink); 
+            background-color: white;
+            color: var(--text-color);
+            min-width: 250px;
+            appearance: none; 
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF9AA2'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e"); 
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 16px;
+        }
+
+        button {
+            background-color: var(--macaron-pink); /* 保持粉色按鈕 */
+            color: white;
+            font-weight: bold;
+            border: none; /* 確保沒有邊框 */
+        }
+
+        button:hover {
+            background-color: #FF7B8E; /* hover顏色更深 */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 結果展示區 */
+        #summary-header {
+            text-align: left;
+            font-size: 1.5em;
+            color: var(--macaron-blue);
+            margin-bottom: 20px;
+        }
+
+        .video-list {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            text-align: left;
+        }
+
+        .video-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            /* 卡片左側強調色使用薄荷綠 */
+            border-left: 8px solid var(--macaron-mint); 
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .macaron-shadow {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .macaron-link {
+            color: var(--macaron-pink);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .macaron-link:hover {
+            text-decoration: underline;
+        }
+
+        .video-card h3 {
+            color: var(--macaron-purple);
+            margin-top: 0;
+            /* 分隔線改為黃色虛線 */
+            border-bottom: 1px dashed var(--macaron-yellow); 
+            padding-bottom: 10px;
+        }
+        
+        .video-card h4 {
+            color: var(--macaron-blue);
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .video-card ul {
+            list-style-type: '📖 ';
+            padding-left: 25px;
+        }
+        .video-card li {
+            margin-bottom: 5px;
+        }
+
+        .quote-box {
+            /* 引用框背景改為珊瑚黃 */
+            background-color: var(--macaron-yellow); 
+            border-left: 5px solid var(--macaron-pink);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        .timeline {
+            font-weight: bold;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        /* 載入動畫 */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 50px 0;
+            color: var(--macaron-pink);
+            font-size: 1.5em;
+        }
+        
+        .material-icons {
+            vertical-align: middle;
+            margin-right: 5px;
+            font-size: 1.5em;
+        }
+        /* 確保 spin 樣式定義 */
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 💡 額外加入這行，消除 favicon 錯誤 */
+        .invisible-favicon {
+            display: none;
+        }
+    </style>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="material-icons">menu_book</i> 每日新知加速器</h1>
+        <p class="subtitle">追求高效率學習，快速吸收最新知識與資訊</p>
+
+        <div class="input-group">
+            <label for="topic-select">請選擇或輸入您感興趣的主題：</label>
+            <select id="topic-select">
+                <option value="">-- 請選擇主題 --</option>
+                <option value="人工智慧" selected>人工智慧最新發展</option>
+                <option value="科技新聞">科技新聞</option>
+                <option value="行銷趨勢">行銷趨勢</option>
+            </select>
+            <button id="fetch-button">
+                <i class="material-icons">search</i> 獲取今日新知
+            </button>
+        </div>
+
+        <div id="loading" class="loading">
+            <i class="material-icons spin">cached</i> 正在為您整理最新影片與摘要...
+        </div>
+        
+        <div id="summary-header"></div>
+        <div id="results-container">
+            <p class="info" style="color: #999;">點擊上方按鈕，開始獲取您的「今日新知摘要清單」。</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
