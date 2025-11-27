@@ -1,16 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
-const axios = require('axios'); // 用於實際 API 呼叫，此處為模擬
-const app = express();
-
-// ⭐️ Zeabur 兼容：使用環境變數 PORT，否則使用 3000 (本地開發)
-const PORT = process.env.PORT || 3000; 
+const axios = require('axios'); // 模擬使用，用於實際 API 呼叫
+const app = express(); // ⭐️ 確保在所有使用 app 的程式碼之前定義
+const PORT = process.env.PORT || 3000; // ⭐️ Zeabur 兼容：使用環境變數 PORT
 
 // 載入環境變數
 dotenv.config();
 
 // 設置靜態檔案目錄 (用於提供 index.html 和 app.js)
+// ⭐️ 關鍵：沒有定義 app.get('/')，讓這行自動提供 index.html
 app.use(express.static(path.join(__dirname)));
 app.use(express.json()); // 解析 JSON 格式的請求主體
 
@@ -117,8 +116,7 @@ app.get('/api/latest-videos', async (req, res) => {
     console.log(`收到主題請求：${topic}`);
 
     try {
-        // *** 實際應用中：您會在這裡呼叫 Google 搜尋或 YouTube API ***
-        // *** 模擬資料回傳 ***
+        // *** 這是模擬數據，未來您將在這裡替換成實際的 Google/YouTube API 呼叫 ***
         const results = mockVideoData(topic);
         
         if (results.length > 0) {
@@ -137,7 +135,9 @@ app.get('/api/latest-videos', async (req, res) => {
     }
 });
 
-// ⭐️ 確保伺服器監聽端口 (這是讓伺服器運作的關鍵)
+
+// ⭐️ 伺服器監聽端口 (這是讓伺服器運作的關鍵)
 app.listen(PORT, () => {
+    // 輸出訊息，方便本地除錯
     console.log(`伺服器啟動中，請開啟 http://localhost:${PORT}`);
 });
